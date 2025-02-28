@@ -1,0 +1,32 @@
+
+.loadContainer {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    height: 0;
+
+    &.debug {
+        border: solid 1px red;
+        .loadGuard {
+            border: solid 2px lime;
+        }
+        .loadingIndicator {
+            border: solid 1px blue;
+        }
+    }
+
+    &:not(.visible) {
+        .loadGuard, .loadingIndicator {
+            display: none !important;
+            content: "You Can't See Me";
+        }
+    }
+
+    .loadGuard {
+        position: absolute;
+        width: 100%;
+        height: 150px; // Height from bottom of screen to start loading
+        bottom: 0;
+        display: block;
+    }
+}

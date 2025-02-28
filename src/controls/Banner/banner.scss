@@ -1,0 +1,76 @@
+@mixin create-banner-variant($color, $button-color: null, $background-color: mix($button-color, #fff, 20%), ) {
+    color: $color;
+    background-color: $background-color;
+
+    $border-color: mix($color, $background-color, 8%);
+
+    >.sep-banner__guts {
+        border-top: 1px solid $border-color;
+        border-bottom: 1px solid $border-color;
+
+    }
+
+    &.sep-banner--full-border>.sep-banner__guts {
+        border-left: 1px solid $border-color;
+        border-right: 1px solid $border-color;
+    }
+}
+
+.sep-banner {
+    width: 100%;
+    overflow: hidden;
+    flex-shrink: 0;
+    border-radius: 8px;
+    margin-bottom: 15px;
+
+    >.sep-banner__guts {
+        padding: 0.5rem 1rem;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+
+        &>.sep-banner__buttons {
+            flex-shrink: 0;
+            .MuiButton-outlinedWarning {
+                font-weight: 600;
+            }
+        }
+
+        &>.sep-banner__content {
+            font-size: 1rem;
+
+            &>.sep-banner__title {
+                font-weight: 700;
+                font-size: 110%;
+                font-family: 'Poppins';
+            }
+        }
+    }
+
+    // make the banner appear to slide down rather than just grow
+    &.collapse-animating>.sep-banner__guts {
+        transition: transform 200ms ease;
+        transform: translateY(-100%);
+    }
+
+    &.collapse-animating.expanding>.sep-banner__guts {
+        transform: translateY(0);
+    }
+
+    /*** Banner Flavors ***/
+    &.sep-banner--info {
+        @include create-banner-variant(#000, #fff);
+    }
+
+    &.sep-banner--warning {
+        @include create-banner-variant($color: #E5A30B, $button-color: #FFC107);
+    }
+
+    &.sep-banner--error {
+        @include create-banner-variant($color: #B72136, $button-color: #B72136);
+    }
+
+    &.sep-banner--success {
+        @include create-banner-variant($color: #229A16, $button-color: #229A16);
+    }
+}
